@@ -6,8 +6,8 @@ from flask.ext.login import LoginManager
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql://dukiemar:rameik@localhost/mydatabase'
-app.config['SQLALCHEMY_DATABASE_URI']='postgresl://vipywuddzcwghu:TD-iEfkQMgBDcthqFpwlV7MjBD@ec2-54-197-245-93.compute-1.amazonaws.com:5432/ddjb4h7m7opmpk'
+#app.config['SQLALCHEMY_DATABASE_URI']='postgresql://dukiemar:rameik@localhost/mydatabase'
+app.config['SQLALCHEMY_DATABASE_URI']='postgresql://vipywuddzcwghu:TD-iEfkQMgBDcthqFpwlV7MjBD@ec2-54-197-245-93.compute-1.amazonaws.com:5432/ddjb4h7m7opmpk'
 #the active databases are above
 
 
