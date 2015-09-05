@@ -1,0 +1,42 @@
+
+<!Doctype html>
+<html>
+  <head> <style>
+      body{background:#CCFF66}
+      p{color:blue}
+    </style></head>
+  <body>
+<h3>USER SIGN-UP</h3>
+    <form action="{{url_for('profile')}}" method="POST" enctype="multipart/form-data">
+      <p>Image</p>
+      <p>(Please choose your profile image)</p>
+      <input type="file" name="image"/>
+      <br><br>
+      <p>First Name</p>
+      <input type="text" name="firstname">
+      <br><br>
+      <p>Last Name</p>
+      <input type="text" name="lastname">
+      <br><br>
+      <p>Username</p>
+      <input type="text" name="username">
+      <br><br>
+      <p>Email</p>
+      <input type="text" name="email">
+      <br><br>
+      <p>Password</p>
+      <input type="password" name="password">
+      <br><br>
+      <p>Age</p>
+      <input type="text" name="age">
+      <br><br>
+      <p>Sex</p>
+      <select name="sex">
+         <option value="Male">Male</option>
+         <option value="Female">Female</option>
+      </select><br><br>
+      <input type="submit" value="Submit">
+      
+    </form>
+  </body>
+</html>

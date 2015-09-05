@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+
+{% block js %}
+{% endblock %}
+
+
+{% block main %}
+  <head>
+    <title>User Profile</title>
+    <style>
+      body{
+        background-color:#8FBC8F;
+      }
+       #dollar{
+         padding-bottom: 80px;
+         border-bottom-width: 5px;
+      }
+      
+      .info{
+        background-color: #556B2F;
+        margin-left: 450px;
+        position: relative;
+        border-style: solid;
+        border-bottom-width: 0px;
+        border-top-width: 0px;
+        border-color: black;
+        padding-top: 10px;
+        padding-right: 50px;
+        padding-bottom: 15px;
+        padding-left: 50px;
+        margin-top: 1px;
+        margin-bottom: 1px;
+      }
+      #name{
+        border-bottom-width: 5px;
+        border-top-width: 5px;
+        margin-top: 1px;
+        margin-bottom: 20px;
+      }
+      img{
+      width: 400px;
+      height: 400px;
+      position: absolute;
+      margin-right: 5px;
+      position:absolute;top:50
+      }
+      #date{
+        border-top-width: 5px;
+        border-bottom-width: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    
+      <img src="/static/{{user['image']}}"> 
+      <h3 class="info" id="name">{{user['fname']}} {{user['lname']}}</h3>
+      <h3 class="info" id="date">Profile Added On: {{ mytime }}</h3>
+      <h3 class="info">Username: {{user['username']}} </h3>
+      <h3 class="info">ID: {{user['id']}}</h3>
+      <h3 class="info">Sex: {{user['sex']}}</h3>
+      <h3 class="info">Age: {{user['age']}}</h3>
+      <h3 class="info">Highest Score Platformer: {{user['highscore_P']}}</h3>
+    <h3 class="info">Highest Score Space Invader: {{user['highscore_SI']}}</h3>
+      <h3 class="info" id="cash">TDollars: {{user['tdollars']}}</h3>
+   
+  </body>
+{% endblock %}
