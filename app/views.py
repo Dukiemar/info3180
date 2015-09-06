@@ -183,10 +183,10 @@ def game(id):
     return render_template('spaceinvader.html')
  
 
-@app.route('/game/highscore/', methods=['POST'])
+@app.route('/game/highscore/', methods=['POST','GET'])
 #@login_required
 def highscore():
-  if request.method=="POST":
+  #if request.method=="POST":
     user = SignUp.query.filter_by(id=current_user.get_id()).first()
     return jsonify( {"platformer": user.highscore_P, "spaceinvader" : user.highscore_SI}) 
      
@@ -200,7 +200,7 @@ def confirm_email(confirmation):
   toname='User'
   subject='Confirmation of email'
   fromaddr = 'dukiemarshaw@gmail.com'
-  msg='Thank you for signing up. Please confirm your email by clicking the link that follows'+'  '+'http://practice-188636.sae1.nitrousbox.com:8080/signup/confirm/'+confirmation
+  msg='Thank you for signing up. Please confirm your email by clicking the link that follows'+'  '+'http://dukes-info-proj3.herokuapp.com/signup/confirm/'+confirmation
   toaddr = request.form.get("email")
   message = """From: {} <{}>
 
