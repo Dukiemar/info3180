@@ -82,7 +82,7 @@ def profile():
       db.session.add(user)
       db.session.commit()  
       confirm_email(confirmation)
-      flash("profile successfully submitted")
+      return "Profile successfully submitted,check your email for confirmation link. Go back to the previous page and refresh if you wish to enter another"
     return render_template('signup.html',form=form)
   
 @app.route('/signup/confirm/<confirm>/', methods=['GET'])
@@ -105,7 +105,7 @@ def login():
       if user:
         if user.password == form.password.data:
           return redirect(url_for("games"))
-    flash("login failed please check your credentials")
+      return "Login failed. Please check to ensure that the username and password that was submitted at the signup route is what you are entering."
     return render_template("loginForm.html", form=form)
 
   
@@ -119,19 +119,6 @@ def profiles():
       users={'users':lst}
   return render_template('profiles.html', users=users)
   
-
-# @app.route('/profiles',methods=['GET','POST'])
-# def profiles():
-#   users=db.session.query(SignUp).all()
-#   if request.headers['Content-Type']=='application/json':
-#     lst=[]
-#     for user in users:
-#       lst.append({'id':user.id, 'image':user.image, 'fname':user.firstname,'lname':user.lastname,'sex':user.sex, 'age':user.age,'highscore_P':user.highscore_P,'highscore_SI':user.highscore_SI,'tdollar':user.tdollars})
-#       users={'users':lst}
-#       return jsonify(user)#Response(json.dumps(users), mimetype='application/json')
-#   else:
-#     return render_template('profiles.html', users=users)
-  
   
 @app.route('/profile/<userid>',methods=['GET','POST'])
 def profiles_view(userid):
@@ -139,35 +126,27 @@ def profiles_view(userid):
   user = {'id':prof.id, 'image':prof.image, 'age':prof.age, 'fname':prof.firstname, 'lname':prof.lastname,'username':prof.username, 'sex':prof.sex,'highscore_P':prof.highscore_P,'highscore_SI':prof.highscore_SI,'tdollars':prof.tdollars}
   return render_template('profile.html', user=user,mytime=timeinfo())
   
-# @app.route('/profile/<userid>',methods=['GET','POST'])
-# def profiles_view(userid):
-#   prof=SignUp.query.filter_by(id=userid).first()
-#   if (request.method == 'POST' or request.headers['Content-Type'] == 'application/json'):
-#     return jsonify(id=prof.id, firstname=prof.fristname, lastname=prof.lastname, username=prof.username, image=prof.image, sex=prof.sex, age=prof.age,highscore_P=prof.highscore_P,highscore_SI=prof.highscore_SI,tdollars=prof.tdollars)
-#   else:
-#     user = {'id':prof.id, 'image':prof.image, 'age':prof.age, 'fname':prof.firstname, 'lname':prof.lastname,'username':prof.username, 'sex':prof.sex,'highscore_P':prof.highscore_P,'highscore_SI':prof.highscore_SI,'tdollars':prof.tdollars}
-#     return render_template('profile.html', user=user,mytime=timeinfo())
-  
 
 @app.route('/profile',methods=['GET','POST'])
 def profile_view():
-  user=SignUp.query.filter_by(id=current_user.get_id()).first()
+  prof=SignUp.query.filter_by(id=3).first()
+  user = {'id':prof.id, 'image':prof.image, 'age':prof.age, 'fname':prof.firstname, 'lname':prof.lastname,'username':prof.username, 'sex':prof.sex,'highscore_P':prof.highscore_P,'highscore_SI':prof.highscore_SI,'tdollars':prof.tdollars}
   return render_template('profile.html', user=user,mytime=timeinfo())
 
-  
 
 @app.route("/profile/update", methods=["GET", "POST"])
 def updater():
   form = update()
-  if request.method=="GET":
-     render_template("update.html")
+  #if request.method=="GET":
+   #  render_template("update.html")
   if request.method=="POST":
-    user = SignUp.query.filter_by(id=current_user.get_id()).first()
+    user = SignUp.query.filter_by(id=1).first()
     user.lastname=form.lastname.data
     user.firstname=form.firstname.data
     user.email=form.email.data
     user.age=form.age.data
     user.image=form.image.data
+    db.session.add(user)
     db.session.commit()
   return render_template("update.html", form=form)
  
@@ -188,7 +167,7 @@ def game(id):
 def highscore():
   #if request.method=="POST":
     user = SignUp.query.filter_by(id=current_user.get_id()).first()
-    return jsonify( {"platformer": user.highscore_P, "spaceinvader" : user.highscore_SI}) 
+    return jsonify( {"platformer": 0, "spaceinvader" : 0}) 
      
   
 
