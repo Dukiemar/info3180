@@ -112,26 +112,41 @@ def login():
 @app.route('/profiles',methods=['GET','POST'])
 def profiles():
   users=db.session.query(SignUp).all()
-  #if request.headers['Content-Type']=='application/json':
-  lst=[]
-  for user in users:
-    lst.append({'id':user.id, 'image':user.image, 'fname':user.firstname,'lname':user.lastname,'sex':user.sex, 'age':user.age,'highscore_P':user.highscore_P,'highscore_SI':user.highscore_SI,'tdollar':user.tdollars})
-  users={'users':lst}
-  return jsonify(users)
-      
-   #   return Response(json.dumps(users), mimetype='application/json')
-  #else:
-    #return render_template('profiles.html', users=users)
+  if request.headers['Content-Type']=='application/json':
+    lst=[]
+    for user in users:
+      lst.append({'id':user.id, 'image':user.image, 'fname':user.firstname,'lname':user.lastname,'sex':user.sex, 'age':user.age,'highscore_P':user.highscore_P,'highscore_SI':user.highscore_SI,'tdollar':user.tdollars})
+      users={'users':lst}
+  return render_template('profiles.html', users=users)
+  
+
+# @app.route('/profiles',methods=['GET','POST'])
+# def profiles():
+#   users=db.session.query(SignUp).all()
+#   if request.headers['Content-Type']=='application/json':
+#     lst=[]
+#     for user in users:
+#       lst.append({'id':user.id, 'image':user.image, 'fname':user.firstname,'lname':user.lastname,'sex':user.sex, 'age':user.age,'highscore_P':user.highscore_P,'highscore_SI':user.highscore_SI,'tdollar':user.tdollars})
+#       users={'users':lst}
+#       return jsonify(user)#Response(json.dumps(users), mimetype='application/json')
+#   else:
+#     return render_template('profiles.html', users=users)
   
   
 @app.route('/profile/<userid>',methods=['GET','POST'])
 def profiles_view(userid):
   prof=SignUp.query.filter_by(id=userid).first()
-  if (request.method == 'POST' or request.headers['Content-Type'] == 'application/json'):
-    return jsonify(id=prof.id, firstname=prof.fristname, lastname=prof.lastname, username=prof.username, image=prof.image, sex=prof.sex, age=prof.age,highscore_P=prof.highscore_P,highscore_SI=prof.highscore_SI,tdollars=prof.tdollars)
-  else:
-    user = {'id':prof.id, 'image':prof.image, 'age':prof.age, 'fname':prof.firstname, 'lname':prof.lastname,'username':prof.username, 'sex':prof.sex,'highscore_P':prof.highscore_P,'highscore_SI':prof.highscore_SI,'tdollars':prof.tdollars}
-    return render_template('profile.html', user=user,mytime=timeinfo())
+  user = {'id':prof.id, 'image':prof.image, 'age':prof.age, 'fname':prof.firstname, 'lname':prof.lastname,'username':prof.username, 'sex':prof.sex,'highscore_P':prof.highscore_P,'highscore_SI':prof.highscore_SI,'tdollars':prof.tdollars}
+  return render_template('profile.html', user=user,mytime=timeinfo())
+  
+# @app.route('/profile/<userid>',methods=['GET','POST'])
+# def profiles_view(userid):
+#   prof=SignUp.query.filter_by(id=userid).first()
+#   if (request.method == 'POST' or request.headers['Content-Type'] == 'application/json'):
+#     return jsonify(id=prof.id, firstname=prof.fristname, lastname=prof.lastname, username=prof.username, image=prof.image, sex=prof.sex, age=prof.age,highscore_P=prof.highscore_P,highscore_SI=prof.highscore_SI,tdollars=prof.tdollars)
+#   else:
+#     user = {'id':prof.id, 'image':prof.image, 'age':prof.age, 'fname':prof.firstname, 'lname':prof.lastname,'username':prof.username, 'sex':prof.sex,'highscore_P':prof.highscore_P,'highscore_SI':prof.highscore_SI,'tdollars':prof.tdollars}
+#     return render_template('profile.html', user=user,mytime=timeinfo())
   
 
 @app.route('/profile',methods=['GET','POST'])
