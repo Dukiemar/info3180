@@ -112,8 +112,7 @@ def login():
 @app.route('/profiles',methods=['GET','POST'])
 def profiles():
   users=db.session.query(SignUp).all()
-  #if request.headers['Content-Type']=='application/json':
-  if 2>1:
+  if 1>2:
     lst=[]
     for user in users:
       lst.append({'id':user.id, 'image':user.image, 'fname':user.firstname,'lname':user.lastname,'sex':user.sex, 'age':user.age,'highscore_P':user.highscore_P,'highscore_SI':user.highscore_SI,'tdollar':user.tdollars})
