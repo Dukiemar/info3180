@@ -112,14 +112,16 @@ def login():
 @app.route('/profiles',methods=['GET','POST'])
 def profiles():
   users=db.session.query(SignUp).all()
-  if request.headers['Content-Type']=='application/json':
-    lst=[]
-    for user in users:
-      lst.append({'id':user.id, 'image':user.image, 'fname':user.firstname,'lname':user.lastname,'sex':user.sex, 'age':user.age,'highscore_P':user.highscore_P,'highscore_SI':user.highscore_SI,'tdollar':user.tdollars})
-      users={'users':lst}
-      return Response(json.dumps(users), mimetype='application/json')
-  else:
-    return render_template('profiles.html', users=users)
+  #if request.headers['Content-Type']=='application/json':
+  lst=[]
+  for user in users:
+    lst.append({'id':user.id, 'image':user.image, 'fname':user.firstname,'lname':user.lastname,'sex':user.sex, 'age':user.age,'highscore_P':user.highscore_P,'highscore_SI':user.highscore_SI,'tdollar':user.tdollars})
+  users={'users':lst}
+  return jsonify(users)
+      
+   #   return Response(json.dumps(users), mimetype='application/json')
+  #else:
+    #return render_template('profiles.html', users=users)
   
   
 @app.route('/profile/<userid>',methods=['GET','POST'])
