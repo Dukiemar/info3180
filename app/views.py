@@ -129,7 +129,7 @@ def profiles_view(userid):
 
 @app.route('/profile',methods=['GET','POST'])
 def profile_view():
-  prof=SignUp.query.filter_by(id=3).first()
+  prof=SignUp.query.filter_by(id=2).first()
   user = {'id':prof.id, 'image':prof.image, 'age':prof.age, 'fname':prof.firstname, 'lname':prof.lastname,'username':prof.username, 'sex':prof.sex,'highscore_P':prof.highscore_P,'highscore_SI':prof.highscore_SI,'tdollars':prof.tdollars}
   return render_template('profile.html', user=user,mytime=timeinfo())
 
