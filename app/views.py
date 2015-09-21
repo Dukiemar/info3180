@@ -202,7 +202,7 @@ Subject: {}
   
   # Credentials (if needed)
   username = 'dukiemarshaw@gmail.com'
-  password = 'gdenyclmlrefbrej'
+  password = 'private-hahahahaha'
 
   # The actual mail send
   server = smtplib.SMTP('smtp.gmail.com:587')
